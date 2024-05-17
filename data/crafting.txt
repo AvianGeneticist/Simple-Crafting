@@ -1,0 +1,690 @@
+mission "Simple Ammunition Crafting"
+	name "Materials and Ammunition Crafting"
+	description "Use your shipboard production facilities to create components or ammunition."
+	job
+	repeat
+	to offer
+		or
+			"flagship attribute: component production" >= 1000
+			"flagship attribute: ammunition production" >= 1000
+	on accept
+		conversation
+			label start
+			`You engage your ship's factory and prepare it to produce something. What do you want to make?`
+			choice
+				`	(Browse Component Recipes.)`
+					to display
+						"flagship attribute: component production" >= 1000
+					goto componentlist
+				`	(Browse Ammunition Recipes.)`
+					to display
+						"flagship attribute: ammunition production" >= 1000
+					goto ammunitionlist
+				`	(Don't craft anything.)`
+					defer
+
+			label componentlist
+			`	Your factory supports crafting components, the base materials for many common munitions. Produced components will probably fetch a nice sum if you can't use them.`
+			choice
+				`	(Craft Armor Plating.)`
+					goto armorplating
+				`	(Craft Circuit Boards.)`
+					goto circuitboards
+				`	(Craft Explosives.)`
+					goto explosives
+				`	(Craft Magnets.)`
+					goto magnets
+				`	(Craft Power Cells.)`
+					goto powercells
+				`	(Craft Sensors.)`
+					goto sensors
+				`	(Back to start.)`
+					goto start
+			
+			label armorplating
+			`	Armor Plating is crafted from Aluminum and Titanium. This recipe will not result in a change in cargo space.`
+			choice
+				`	(Craft some Armor Plating.)`
+					to display
+						and
+							"outfit: Aluminum" >= 1
+							"outfit: Titanium" >= 1
+					goto armorplating2
+				`	(Back to components list.)`
+					goto componentlist
+
+			label armorplating2
+			action
+				outfit "Aluminum" -1
+				outfit "Titanium" -1
+				outfit "Component: Armor Plating" 2
+			`	Quickly, your factory churns out some armor plating.`
+				goto armorplating
+
+			label circuitboards
+			`	Circuit Boards are crafted from Copper and Silicon. This recipe will not result in a change in cargo space.`
+			choice
+				`	(Craft some Circuit Boards.)`
+					to display
+						and
+							"outfit: Copper" >= 1
+							"outfit: Silicon" >= 1
+					goto circuitboards2
+				`	(Back to components list.)`
+					goto componentlist
+
+			label circuitboards2
+			action
+				outfit "Copper" -1
+				outfit "Silicon" -1
+				outfit "Component: Circuit Boards" 2
+			`	Quickly, your factory churns out some circuit boards.`
+				goto circuitboards
+
+			label explosives
+			`	Explosives are crafted from Lead and Tungsten. This recipe will not result in a change in cargo space.`
+			choice
+				`	(Craft some Explosives.)`
+					to display
+						and
+							"outfit: Lead" >= 1
+							"outfit: Tungsten" >= 1
+					goto explosives2
+				`	(Back to components list.)`
+					goto componentlist
+
+			label explosives2
+			action
+				outfit "Lead" -1
+				outfit "Tungsten" -1
+				outfit "Component: Explosives" 2
+			`	Quickly, your factory churns out some explosives.`
+				goto explosives
+
+			label magnets
+			`	Magnets are crafted from Iron and Neodymium. This recipe will not result in a change in cargo space.`
+			choice
+				`	(Craft some Magnets.)`
+					to display
+						and
+							"outfit: Iron" >= 1
+							"outfit: Neodymium" >= 1
+					goto magnets2
+				`	(Back to components list.)`
+					goto componentlist
+
+			label magnets2
+			action
+				outfit "Iron" -1
+				outfit "Neodymium" -1
+				outfit "Component: Magnets" 2
+			`	Quickly, your factory churns out some explosives.`
+				goto magnets
+
+			label powercells
+			`	Power Cells are crafted from Silver and Uranium. This recipe will not result in a change in cargo space.`
+			choice
+				`	(Craft some Power Cells.)`
+					to display
+						and
+							"outfit: Silver" >= 1
+							"outfit: Uranium" >= 1
+					goto powercells2
+				`	(Back to components list.)`
+					goto componentlist
+
+			label powercells2
+			action
+				outfit "Silver" -1
+				outfit "Uranium" -1
+				outfit "Component: Power Cells" 2
+			`	Quickly, your factory churns out some power cells.`
+				goto powercells
+
+			label sensors
+			`	Sensors are crafted from Silver and Silicon. This recipe will not result in a change in cargo space.`
+			choice
+				`	(Craft some Sensors.)`
+					to display
+						and
+							"outfit: Silver" >= 1
+							"outfit: Silicon" >= 1
+					goto sensors2
+				`	(Back to components list.)`
+					goto componentlist
+
+			label sensors2
+			action
+				outfit "Silver" -1
+				outfit "Silicon" -1
+				outfit "Component: Sensors" 2
+			`	Quickly, your factory churns out some sensors.`
+				goto sensors
+
+			label ammunitionlist
+			`	Your factory supports crafting ammunition, practical supplies for firing weapons. Chances are you'll need a blueprint for your ammunition; luckily, any launcher should be able to give at least workable instructions.`
+			choice
+				`	(Craft some Gatling Gun Ammo.)`
+					to display
+						or
+							"outfit (installed): Gatling Gun" != 0
+							"outfit (installed): Gatling Turret" != 0
+					goto gatlinggunammo
+				`	(Craft some Javelins.)`
+					to display
+						or
+							"outfit (installed): Javelin Mini Pod" != 0
+							"outfit (installed): Javelin Pod" != 0
+							"outfit (installed): Javelin Turret" != 0
+					goto javelin
+				`	(Craft some Heavy Rockets.)`
+					to display
+						or
+							"outfit (installed): Heavy Rocket Pod" != 0
+							"outfit (installed): Heavy Rocket Launcher" != 0
+					goto heavyrocket
+				`	(Craft some Meteor Missiles.)`
+					to display
+						or
+							"outfit (installed): Meteor Missile Pod" != 0
+							"outfit (installed): Meteor Missile Launcher" != 0
+					goto meteormissile
+				`	(Craft some Sidewinder Missiles.)`
+					to display
+						or
+							"outfit (installed): Sidewinder Missile Pod" != 0
+							"outfit (installed): Sidewinder Missile Launcher" != 0
+					goto sidewinder
+				`	(Craft some Torpedoes.)`
+					to display
+						or
+							"outfit (installed): Torpedo Pod" != 0
+							"outfit (installed): Torpedo Launcher" != 0
+					goto torpedo
+				`	(Craft some Typhoon Torpedoes.)`
+					to display
+						or
+							"outfit (installed): Typhoon Pod" != 0
+							"outfit (installed): Typhoon Launcher" != 0
+					goto typhoontorpedo
+				`	(Craft some Skipper Railgun Slugs.)`
+					to display
+						or
+							"outfit (installed): Railgun" != 0
+					goto skipperslugs
+				`	(Craft some Hai Trackers.)`
+					to display
+						or
+							"outfit (installed): Hai Tracker Pod" != 0
+					goto tracker
+				`	(Craft some Firelight Missiles.)`
+					to display
+						or
+							"outfit (installed): Firelight Missile Bank" != 0
+					goto firelight
+				`	(Craft some Firestorm Torpedoes.)`
+					to display
+						or
+							"outfit (installed): Firestorm Battery" != 0
+					goto firestorm
+				`	(Craft some Piercer Missiles.)`
+					to display
+						or
+							"outfit (installed): Piercer Missile Launcher" != 0
+					goto piercer
+				`	(Craft some Cluster Mines.)`
+					to display
+						or
+							"outfit (installed): Cluster Mine Layer" != 0
+					goto clustermine
+				`	(Craft some Thunderheads.)`
+					to display
+						or
+							"outfit (installed): Thunderhead Launcher" != 0
+					goto thunderhead
+				`	(Craft some Swarm Missiles.)`
+					to display
+						or
+							"outfit (installed): Swarm Pod" != 0
+					goto swarmmissile
+				`	(Craft some Finisher Torpedoes.)`
+					to display
+						or
+							"outfit (installed): Finisher Pod" != 0
+							"outfit (installed): Finisher Maegrolain" != 0
+					goto finisher
+				`	(Craft some EMP Torpedoes.)`
+					to display
+						or
+							"outfit (installed): EMP Torpedo Bay" != 0
+							"outfit (installed): Ka'het EMP Deployer" != 0
+					goto emptorpedo
+				`	(Craft some Teciimach Canisters.)`
+					to display
+						or
+							"outfit (installed): Teciimach Bay" != 0
+							"outfit (installed): Teciimach Pod" != 0
+					goto teciimach
+				`	(Back to start.)`
+					goto start
+
+			# HUMAN SECONDARIES
+
+			label gatlinggunammo
+			`	Gatling Gun Ammo is crafted in batches of 500 from 2 Armor Plating and 2 Explosives. This recipe will result in a net 3 tons of cargo space being freed.`
+			choice
+				`	(Craft some Gatling Gun Ammo.)`
+					to display
+						and
+							"outfit: Component: Armor Plating" >= 2
+							"outfit: Component: Explosives" >= 2
+					goto gatlinggunammo2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label gatlinggunammo2
+			action
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Explosives" -2
+				outfit "Gatling Gun Ammo" 500
+			`	At a surprisingly rapid pace, the factory churns out five hundred Gatling Gun Ammo.`
+				goto gatlinggunammo
+
+			label javelin
+			`	Javelins are crafted in batches of 75 from 1 Armor Plating and 4 Explosives. This recipe will result in a net 1 ton of cargo space being freed.`
+			choice
+				`	(Craft some Javelins.)`
+					to display
+						and
+							"outfit: Component: Armor Plating" >= 1
+							"outfit: Component: Explosives" >= 3
+					goto javelin2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label javelin2
+			action
+				outfit "Component: Armor Plating" -1
+				outfit "Component: Explosives" -3
+				outfit "Javelin" 75
+			`	With clockwork efficiency, the factory churns out seventy-five Javelins.`
+				goto javelin
+
+			label heavyrocket
+			`	Heavy Rockets are crafted in batches of 6 from 3 Armor Plating, 2 Sensors, and 4 Explosives. This recipe will result in a net 6 tons of cargo space being freed.`
+			choice
+				`	(Craft some Heavy Rockets.)`
+					to display
+						and
+							"outfit: Component: Armor Plating" >= 3
+							"outfit: Component: Explosives" >= 4
+							"outfit: Component: Sensors" >= 2
+					goto heavyrocket2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label heavyrocket2
+			action
+				outfit "Component: Armor Plating" -3
+				outfit "Component: Explosives" -4
+				outfit "Component: Sensors" -2
+				outfit "Heavy Rocket" 6
+			`	The factory churns out six Heavy Rockets in short order.`
+				goto heavyrocket
+
+			label meteormissile
+			`	Meteor Missiles are crafted in batches of 10 from 2 Sensors and 5 Explosives. This recipe will result in a net 5 tons of cargo space being freed.`
+			choice
+				`	(Craft some Meteor Missiles.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 5
+							"outfit: Component: Sensors" >= 2
+					goto meteormissile2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label meteormissile2
+			action
+				outfit "Component: Explosives" -5
+				outfit "Component: Sensors" -2
+				outfit "Meteor Missile" 10
+			`	Expectedly quickly, the factory assembles ten Meteor Missiles.`
+				goto meteormissile
+
+			label sidewinder
+			`	Sidewinder Missiles are crafted in batches of 15 from 2 Sensors, 1 Circuit Boards, 2 Armor Plating, and 4 Explosives. This recipe will result in a net 6 tons of cargo space being freed.`
+			choice
+				`	(Craft some Sidewinder Missiles.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 4
+							"outfit: Component: Circuit Boards" >= 1
+							"outfit: Component: Armor Plating" >= 2
+							"outfit: Component: Sensors" >= 2
+					goto sidewinder2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label sidewinder2
+			action
+				outfit "Component: Explosives" -4
+				outfit "Component: Circuit Boards" -1
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Sensors" -2
+				outfit "Sidewinder Missile" 15
+			`	Alarmingly rapidly, the factory assembles fifteen Sidewinder Missiles.`
+				goto sidewinder
+
+			label torpedo
+			`	Torpedoes are crafted in batches of 6 from 2 Sensors, 2 Armor Plating, and 4 Explosives. This recipe will result in a net 5.6 tons of cargo space being freed.`
+			choice
+				`	(Craft some Torpedoes.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 4
+							"outfit: Component: Armor Plating" >= 2
+							"outfit: Component: Sensors" >= 2
+					goto torpedo2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label torpedo2
+			action
+				outfit "Component: Explosives" -4
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Sensors" -2
+				outfit "Torpedo" 6
+			`	Heavily clunking and churning, the factory produces six Torpedoes.`
+				goto torpedo
+
+			label typhoontorpedo
+			`	Typhoon Torpedoes are crafted in batches of 8 from 2 Sensors, 2 Circuit Boards, 1 Power Cells, 2 Armor Plating, and 6 Explosives. This recipe will result in a net 9 tons of cargo space being freed.`
+			choice
+				`	(Craft some Typhoon Torpedoes.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 6
+							"outfit: Component: Armor Plating" >= 2
+							"outfit: Component: Circuit Boards" >= 2
+							"outfit: Component: Power Cells" >= 1
+							"outfit: Component: Sensors" >= 2
+					goto typhoontorpedo2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label typhoontorpedo2
+			action
+				outfit "Component: Explosives" -6
+				outfit "Component: Circuit Boards" -2
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Power Cells" -1
+				outfit "Component: Sensors" -2
+				outfit "Typhoon Torpedo" 8
+			`	With a noticeable amount of effort, the factory outputs eight Typhoon Torpedoes.`
+				goto typhoontorpedo
+
+			# HAI SECONDARIES
+
+			label skipperslugs
+			`	Skipper Railgun Slugs are crafted in batches of 200 from 2 Magnets, 1 Power Cells, and 1 Circuit Boards. This recipe will result in a net 3.4 tons of cargo space being freed.`
+			choice
+				`	(Craft some Skipper Railgun Slugs.)`
+					to display
+						and
+							"outfit: Component: Circuit Boards" >= 1
+							"outfit: Component: Power Cells" >= 1
+							"outfit: Component: Magnets" >= 2
+					goto skipperslugs2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label skipperslugs2
+			action
+				outfit "Component: Circuit Boards" -1
+				outfit "Component: Power Cells" -1
+				outfit "Component: Magnets" -2
+				outfit "Railgun Slug" 200
+			`	The factory belches forth two hundred Skipper Railgun Slugs at a rate that makes you check to ensure it isn't overclocked.`
+				goto skipperslugs
+			label tracker
+			`	Hai Trackers are crafted in batches of 16 from 4 Sensors, 2 Circuit Boards, and 4 Explosives. This recipe will result in a net 6.8 tons of cargo space being freed.`
+			choice
+				`	(Craft some Hai Trackers.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 4
+							"outfit: Component: Circuit Boards" >= 2
+							"outfit: Component: Sensors" >= 4
+					goto tracker2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label tracker2
+			action
+				outfit "Component: Explosives" -4
+				outfit "Component: Circuit Boards" -2
+				outfit "Component: Sensors" -4
+				outfit "Hai Tracker" 16
+			`	In almost no time at all, the factory belts out sixteen Hai Trackers.`
+				goto tracker
+
+			# KORATH SECONDARIES
+
+			label firelight
+			`	Firelight Missiles are crafted in batches of 8 from 2 Sensors, 2 Armor Plating, and 4 Power Cells. This recipe will result in a net 5.6 tons of cargo space being freed.`
+			choice
+				`	(Craft some Firelight Missiles.)`
+					to display
+						and
+							"outfit: Component: Power Cells" >= 4
+							"outfit: Component: Armor Plating" >= 2
+							"outfit: Component: Sensors" >= 2
+					goto firelight2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label firelight2
+			action
+				outfit "Component: Power Cells" -4
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Sensors" -2
+				outfit "Firelight Missile" 8
+			`	The factory steadily creates and pre-ignites eight Firelight Missiles.`
+				goto firelight
+
+			label firestorm
+			`	Firestorm Torpedoes are crafted in batches of 3 from 3 Sensors, 4 Armor Plating, and 7 Power Cells. This recipe will result in a net 11 tons of cargo space being freed.`
+			choice
+				`	(Craft some Firestorm Torpedoes.)`
+					to display
+						and
+							"outfit: Component: Power Cells" >= 7
+							"outfit: Component: Armor Plating" >= 4
+							"outfit: Component: Sensors" >= 3
+					goto firestorm2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label firestorm2
+			action
+				outfit "Component: Power Cells" -7
+				outfit "Component: Armor Plating" -4
+				outfit "Component: Sensors" -3
+				outfit "Firestorm Torpedo" 3
+			`	With labored clunks and the groan of machinery, the factory outputs three fully-formed Firestorm Torpedoes.`
+				goto firestorm
+
+			label piercer
+			`	Piercer Missiles are crafted in batches of 10 from 1 Sensors, 2 Circuit Boards, 2 Armor Plating, and 3 Explosives. This recipe will result in a net 5 tons of cargo space being freed.`
+			choice
+				`	(Craft some Piercer Missiles.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 3
+							"outfit: Component: Armor Plating" >= 2
+							"outfit: Component: Circuit Boards" >= 2
+							"outfit: Component: Sensors" >= 1
+					goto piercer2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label piercer2
+			action
+				outfit "Component: Explosives" -3
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Circuit Boards" -2
+				outfit "Component: Sensors" -1
+				outfit "Piercer Missile" 10
+			`	The factory comfortably produces a dozen Piercer Missiles.`
+				goto piercer
+
+			label clustermine
+			`	Cluster Mines are crafted in batches of 6 from 2 Sensors, 1 Circuit Boards, 1 Armor Plating, and 6 Explosives. This recipe will result in a net 6.5 tons of cargo space being freed.`
+			choice
+				`	(Craft some Cluster Mines.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 6
+							"outfit: Component: Armor Plating" >= 1
+							"outfit: Component: Circuit Boards" >= 1
+							"outfit: Component: Sensors" >= 2
+					goto clustermine2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label clustermine2
+			action
+				outfit "Component: Explosives" -3
+				outfit "Component: Armor Plating" -2
+				outfit "Component: Circuit Boards" -2
+				outfit "Component: Sensors" -1
+				outfit "Cluster Mine" 6
+			`	The factory toils to produce six Cluster Mines.`
+				goto clustermine
+
+			# WANDERER SECONDARIES
+
+			label thunderhead
+			`	Thunderheads are crafted in batches of 14 from 3 Sensors, 5 Circuit Boards, and 2 Explosives. This recipe will result in a net 5.8 tons of cargo space being freed.`
+			choice
+				`	(Craft some Thunderheads.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 2
+							"outfit: Component: Circuit Boards" >= 5
+							"outfit: Component: Sensors" >= 3
+					goto thunderhead2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label thunderhead2
+			action
+				outfit "Component: Explosives" -2
+				outfit "Component: Circuit Boards" -5
+				outfit "Component: Sensors" -3
+				outfit "Thunderhead Missile" 14
+			`	The factory swiftly and efficiently hashes out fourteen Thunderheads.`
+				goto thunderhead
+
+			# BUNRODEA SECONDARIES
+
+			label swarmmissile
+			`	Swarm Missiles are crafted in batches of 100 from 2 Sensors, 2 Circuit Boards, and 2 Explosives. This recipe will result in a net 2 tons of cargo space being freed.`
+			choice
+				`	(Craft some Swarm Missiles.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 2
+							"outfit: Component: Circuit Boards" >= 2
+							"outfit: Component: Sensors" >= 2
+					goto swarmmissile2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label swarmmissile2
+			action
+				outfit "Component: Explosives" -2
+				outfit "Component: Circuit Boards" -2
+				outfit "Component: Sensors" -2
+				outfit "Swarm Missile" 100
+			`	The factory rattles out a hundred Swarm Missiles in almost no time at all.`
+				goto swarmmissile
+
+			# COALITION SECONDARIES
+
+			label finisher
+			`	Finisher Torpedoes are crafted in batches of 10 from 2 Sensors, 3 Armor Plating, 2 Power Cells, and 4 Explosives. This recipe will result in a net 6 tons of cargo space being freed.`
+			choice
+				`	(Craft some Finisher Torpedoes.)`
+					to display
+						and
+							"outfit: Component: Explosives" >= 4
+							"outfit: Component: Armor Plating" >= 3
+							"outfit: Component: Power Cells" >= 2
+							"outfit: Component: Sensors" >= 2
+					goto finisher2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label finisher2
+			action
+				outfit "Component: Explosives" -4
+				outfit "Component: Armor Plating" -3
+				outfit "Component: Power Cells" -2
+				outfit "Component: Sensors" -2
+				outfit "Finisher Torpedo" 10
+			`	With some mechanical grunt, a batch of ten Finisher Torpedoes is quickly finished.`
+				goto finisher
+
+			# REMNANT SECONDARIES
+
+			label emptorpedo
+			`	EMP Torpedoes are crafted in batches of 6 from 2 Sensors, 1 Circuit Boards, 3 Magnets, and 2 Power Cells. This recipe will result in a net 2 tons of cargo space being freed.`
+			choice
+				`	(Craft some EMP Torpedoes.)`
+					to display
+						and
+							"outfit: Component: Magnets" >= 3
+							"outfit: Component: Circuit Boards" >= 1
+							"outfit: Component: Power Cells" >= 2
+							"outfit: Component: Sensors" >= 2
+					goto emptorpedo2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label emptorpedo2
+			action
+				outfit "Component: Magnets" -3
+				outfit "Component: Circuit Boards" -1
+				outfit "Component: Power Cells" -2
+				outfit "Component: Sensors" -2
+				outfit "EMP Torpedo" 6
+			`	It's not long before a half-dozen EMP Torpedoes wind up in the factory's output slot.`
+				goto emptorpedo
+
+			label teciimach
+			`	EMP Torpedoes are crafted in batches of 4 from 2 Sensors, 2 Circuit Boards, 5 Magnets, and 3 Power Cells. This recipe will result in a net 2 tons of cargo space being freed.`
+			choice
+				`	(Craft some Teciimach Canisters.)`
+					to display
+						and
+							"outfit: Component: Magnets" >= 5
+							"outfit: Component: Circuit Boards" >= 2
+							"outfit: Component: Power Cells" >= 3
+							"outfit: Component: Sensors" >= 2
+					goto teciimach2
+				`	(Back to ammunition list.)`
+					goto ammunitionlist
+
+			label teciimach2
+			action
+				outfit "Component: Magnets" -5
+				outfit "Component: Circuit Boards" -2
+				outfit "Component: Power Cells" -3
+				outfit "Component: Sensors" -2
+				outfit "Teciimach Canister" 4
+			`	Not long after you input the raw materials do four neatly-packed Teciimach Canisters get packaged.`
+				goto teciimach
+
+			

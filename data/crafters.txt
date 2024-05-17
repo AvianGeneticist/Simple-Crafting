@@ -1,0 +1,88 @@
+outfitter "everything"
+	"Component: Explosives"
+	"Component: Armor Plating"
+	"Component: Magnets"
+	"Component: Power Cells"
+	"Component: Circuit Boards"
+	"Component: Sensors"
+	"Shipboard Factory"
+
+# BASE COMPONENTS
+
+category "outfit"
+	"Components"
+
+outfit "Component: Explosives"
+	"display name" "Explosives"
+	plural "Explosives"
+	category "Components"
+	cost 8000
+	thumbnail "outfit/unknown"
+	"mass" 1
+	"installable" -1
+	description "Common explosives used in most conventional munitions. Can't do much by itself, but is a crucial component in ammunition crafting."
+
+outfit "Component: Armor Plating"
+	"display name" "Armor Plating"
+	plural "Armor Plating"
+	category "Components"
+	cost 5000
+	thumbnail "outfit/unknown"
+	"mass" 1
+	"installable" -1
+	description "Basic hull plating for missiles. It's nowhere near strong enough to be used on ships."
+
+outfit "Component: Magnets"
+	"display name" "Magnets"
+	plural "Magnets"
+	category "Components"
+	cost 6000
+	thumbnail "outfit/unknown"
+	"mass" 1
+	"installable" -1
+	description "Powerful magnets with both industrial and military uses, commonly found in electromagnetic pulse weapons."
+
+outfit "Component: Power Cells"
+	"display name" "Power Cells"
+	plural "Power Cells"
+	category "Components"
+	cost 13500
+	thumbnail "outfit/unknown"
+	"mass" 1
+	"installable" -1
+	description "Basic power cells, either for generating an electric payload or powering a missile's other components."
+
+outfit "Component: Circuit Boards"
+	"display name" "Circuit Boards"
+	plural "Circuit Boards"
+	category "Components"
+	cost 4000
+	thumbnail "outfit/unknown"
+	"mass" 1
+	"installable" -1
+	description "Multipurpose and disposable circuit boards designed specifically to be easily manufactured for usage in missiles."
+
+outfit "Component: Sensors"
+	"display name" "Sensors"
+	plural "Sensors"
+	category "Components"
+	cost 7500
+	thumbnail "outfit/unknown"
+	"mass" 1
+	"installable" -1
+	description "Generic, multipurpose sensors. Most homing missiles rely on sensors like these to find their target."
+
+# FACTORIES
+
+outfit "Shipboard Factory"
+	plural "Shipboard Factories"
+	category "Systems"
+	cost 1500000
+	thumbnail "outfit/unknown"
+	"mass" 180
+	"outfit space" -180
+	"ammunition production" 1
+	"component production" 1
+	description "While large-scale outfit manufacturing is nearly impossible on the scale of modern-day starships, smaller outfits like ammunition can be made aboard ship-scale factories like these if supplied the right basal compoents."
+	description "	Due to a recent uptick in interest in mining, modern shipboard factories like this one include processing centers for raw, mined materials, allowing a ship to theoretically replenish its ammunition anywhere it can find the right materials in orbit."
+	description "	To simplify logistics, a factory must be installed in a fleet's flagship to be used for production."
